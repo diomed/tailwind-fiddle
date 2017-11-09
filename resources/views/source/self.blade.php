@@ -28,8 +28,7 @@
                 class="w-full flex-1 py-1 font-mono text-xs border-grey-light leading-tight z-10 bg-transparent"
                 name="name" rows="8" cols="80"
                 placeholder="Your awesome HTML with Tailwind CSS here - note you&rsquo;re already within the body tags."
-            >
-            </textarea>
+            ></textarea>
             <div class="absolute pin-t pin-r">
                 <div class="invisible md:visible text-5xl m-4 font-bold text-grey-lighter">
                     Tailwind Fiddle
