@@ -16,11 +16,12 @@
                 Inception
             </div>
             <div class="px-1 text-xs text-grey-dark">|</div>
-            <a class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer tracking-wide uppercase no-underline" href="https://tailwindcss.com/docs/what-is-tailwind/" target="_blank" rel="nofollow noopener">Docs</a>
-            <div class="px-1 text-xs text-grey-dark">|</div>
             <div class="px-2 font-sans text-xs text-grey-dark hover:text-blue cursor-pointer tracking-wide uppercase">
                 About
             </div>
+            <div class="pl-1 text-xs text-grey-dark">|</div>
+            <div class="pr-1 text-xs text-grey-dark">|</div>
+            <a class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer tracking-wide uppercase no-underline" href="https://tailwindcss.com/docs/what-is-tailwind/" target="_blank" rel="nofollow noopener">Docs</a>
         </div>
         <div class="w-full relative flex flex-1">
             <textarea
