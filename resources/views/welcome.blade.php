@@ -21,12 +21,7 @@
 
     <body>
         <div id="app" class="w-screen h-screen">
-            <tailwind-fiddle
-                class="w-full h-full"
-                src-default='@include('source.default')'
-                src-about='@include('source.about')'
-            >
-            </tailwind-fiddle>
+            @include('twfiddle')
         </div>
 
         <svg style="height: 0; width: 0; position: absolute; visibility: hidden;">
