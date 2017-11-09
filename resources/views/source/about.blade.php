@@ -12,7 +12,7 @@
         </p>
         <p class="mt-8">
             Tailwind is a utility-first CSS framework for rapidly building custom user interfaces by:
-            <ul class="mx-2 my-4 list-reset flex flex-row justify-around">
+            <ul class="mx-2 my-4 list-reset flex flex-col sm:flex-row justify-around">
                 <li><a class="text-blue no-underline hover:text-purple" href="https://twitter.com/adamwathan">Adam Wathan</a></li>
                 <li><a class="text-blue no-underline hover:text-purple" href="https://twitter.com/reinink">Jonathan Reinink</a></li>
                 <li><a class="text-blue no-underline hover:text-purple" href="https://twitter.com/davidhemphill">David Hemphill</a></li>
@@ -22,7 +22,7 @@
             <a class="text-blue no-underline hover:text-purple" href="https://twitter.com/tailwindcss">TailwindCSS</a> on Twitter.
         </p>
         <p class="mt-8">
-            I intend to put the source up on GitHub shortly, but you can already view all of it in your browser or just press the Inception link below to see most of the source of Tailwind Fiddle within itself 💡. Enjoy!
+            The source is up on GitHub at <a class="text-blue no-underline hover:text-purple" href="https://github.com/mkarnicki/tailwind-fiddle">mkarnicki/tailwind-fiddle</a>, but have some fun and hit that Inception menu item first 💡. Enjoy!
         </p>
     </div>
 </div>
