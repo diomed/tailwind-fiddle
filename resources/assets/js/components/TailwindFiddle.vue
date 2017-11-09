@@ -32,7 +32,7 @@
                     placeholder="Your awesome HTML with Tailwind CSS goes here - note you're already within the <body></body> tags.">
                 </textarea>
                 <div class="absolute pin-t pin-r">
-                    <div class="invisible md:visible text-5xl m-4 font-bold text-grey-lighter">
+                    <div class="invisible lg:visible text-5xl m-4 font-bold text-grey-lighter">
                         Tailwind Fiddle
                     </div>
                 </div>
