@@ -28,11 +28,13 @@
             </tailwind-fiddle>
         </div>
 
-        <div class="w-full flex flex-col items-center" style="height: 40rem;">
-            <textarea class="w-full flex-1" name="name" rows="8" cols="80"></textarea>
-            <div class="h-8 flex items-center">
-                <span class="text-xs">Made with 🎵 by <a class="antialiased no-underline text-blue" href="https://twitter.com/mkarnicki"><strong>@mkarnicki</strong></a></span>
-            </div>
-        </div>
+        <svg style="height: 0; width: 0; position: absolute; visibility: hidden;">
+            <defs>
+                <linearGradient x1="0%" y1="0%" y2="100%" id="logoGradient">
+                    <stop stop-color="#2383AE" offset="0%"></stop>
+                    <stop stop-color="#6DD7B9" offset="100%"></stop>
+                </linearGradient>
+            </defs>
+        </svg>
     </body>
 </html>
