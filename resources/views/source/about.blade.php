@@ -21,10 +21,8 @@
             Go follow these awesome guys. You can also check out
             <a class="text-blue no-underline hover:text-purple" href="https://twitter.com/tailwindcss">TailwindCSS</a> on Twitter.
         </p>
-        <div class="flex justify-left xl:justify-center">
-            <p class="w-full xl:w-3/5 mt-8 xl:text-center">
-                I intend to put the source up on GitHub shortly, but you can already view all of it in your browser 🎉. Enjoy!
-            </p>
-        </div>
+        <p class="mt-8">
+            I intend to put the source up on GitHub shortly, but you can already view all of it in your browser or just press the Inception link below to see most of the source of Tailwind Fiddle within itself 💡. Enjoy!
+        </p>
     </div>
 </div>
