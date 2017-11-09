@@ -21,13 +21,15 @@
             </div>
             <div class="w-full relative flex flex-1">
                 <textarea
-                    class="w-full flex-1 py-1 font-mono text-xs border-grey-light leading-tight"
+                    class="w-full flex-1 py-1 font-mono text-xs border-grey-light leading-tight z-10 bg-transparent"
                     name="name" rows="8" cols="80"
                     v-model="source"
                     placeholder="Your awesome HTML with Tailwind CSS here - note you're already within the <body></body> tags.">
                 </textarea>
-                <div class="absolute pin-t pin-r z-2">
-                    <div class="text-5xl m-4 font-bold text-grey-lighter">TailwindCSS fiddle</div>
+                <div class="absolute pin-t pin-r">
+                    <div class="invisible md:visible text-5xl m-4 font-bold text-grey-lighter">
+                        Tailwind Fiddle
+                    </div>
                 </div>
             </div>
             <div class="h-8 flex items-center">
