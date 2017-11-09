@@ -5,7 +5,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>TailwindCSS fiddle</title>
+        <title>TailwindCSS Fiddle</title>
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:site" content="@mkarnicki">
+        <meta name="twitter:title" content="Tailwind Fiddle">
+        <meta name="twitter:description" content="Fiddle with HTML and CSS Tailwind-style with instant visual feedback. It’s like your editor + browser in the browser, but you don’t have to save your source each time you want to see the result.">
+        <meta name="twitter:image" content="https://tailwind.unravel.eu/storage/tailwind-fiddle.png">
 
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/preflight.min.css" rel="stylesheet">
         <style>
