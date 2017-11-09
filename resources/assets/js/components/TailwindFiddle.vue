@@ -5,24 +5,31 @@
 
         <div class="w-full flex flex-col items-center" style="height: 20rem;">
             <div class="w-full h-6 px-2 bg-grey-lighter inline-flex items-center">
-                <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer tracking-wide uppercase" v-on:click="clear">
+                <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase "
+                     v-on:click="clear">
                     Clear
                 </div>
                 <div class="px-1 text-xs text-grey-dark">|</div>
-                <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer tracking-wide uppercase" v-on:click="loadSource(srcDemo)">
+                <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase"
+                     v-on:click="loadSource(srcDemo)">
                     Demo
                 </div>
                 <div class="px-1 text-xs text-grey-dark">|</div>
-                <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer tracking-wide uppercase" v-on:click="loadSource(srcSelf)">
+                <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase"
+                     v-on:click="loadSource(srcSelf)">
                     Inception
                 </div>
                 <div class="px-1 text-xs text-grey-dark">|</div>
-                <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer tracking-wide uppercase" v-on:click="loadSource(srcAbout)">
+                <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase"
+                     v-on:click="loadSource(srcAbout)">
                     About
                 </div>
                 <div class="pl-1 text-xs text-grey-dark">|</div>
                 <div class="pr-1 text-xs text-grey-dark">|</div>
-                <a class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer tracking-wide uppercase no-underline" href="https://tailwindcss.com/docs/what-is-tailwind/" target="_blank" rel="nofollow noopener">Docs</a>
+                <a class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase no-underline"
+                   href="https://tailwindcss.com/docs/what-is-tailwind/"
+                   target="_blank"
+                   rel="nofollow noopener">Docs</a>
             </div>
             <div class="w-full relative flex flex-1">
                 <textarea
