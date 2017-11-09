@@ -7,14 +7,19 @@
 
         <title>TailwindCSS fiddle</title>
 
-        <!-- Styles -->
+
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/preflight.min.css" rel="stylesheet">
+
         <style>
             html, body {
                 height: 100vh;
                 margin: 0;
             }
         </style>
+
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/utilities.min.css" rel="stylesheet">
     </head>
+
     <body>
 
     </body>
