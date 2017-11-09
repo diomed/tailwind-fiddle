@@ -15,10 +15,17 @@
             }
         </style>
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/utilities.min.css" rel="stylesheet">
+
+        <script async src="{{ mix('js/app.js') }}"></script>
     </head>
 
-    <body id="app" class="flex flex-col">
-        <div class="fiddle w-full h-auto overflow-hidden overflow-y-scroll">
+    <body>
+        <div id="app" class="w-screen h-screen">
+            <tailwind-fiddle
+                class="w-full h-full"
+                src-default='@include('source.default')'
+            >
+            </tailwind-fiddle>
         </div>
 
         <div class="w-full flex flex-col items-center" style="height: 40rem;">
