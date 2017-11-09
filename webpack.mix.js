@@ -18,4 +18,5 @@ if (mix.inProduction()) {
        .disableNotifications()
 } else {
     mix.browserSync('tailwind-fiddle.dev')
+       .disableNotifications()
 }
