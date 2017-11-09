@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col">
-        <div class="fiddle w-full flex-1 overflow-hidden overflow-y-scroll antialiased" v-html="source">
+        <div class="w-full flex-1 overflow-hidden overflow-y-scroll antialiased" v-html="source">
         </div>
 
         <div class="w-full flex flex-col items-center" style="height: 20rem;">
