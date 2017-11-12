@@ -75,7 +75,11 @@
         data: function () {
             return {
                 source: ''
-            }
+            };
+        },
+        mounted () {
+            tabOverride.tabSize(4);
+            tabOverride.set(this.$refs.editor);
         },
         methods: {
             clear: function () {

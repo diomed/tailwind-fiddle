@@ -23,6 +23,7 @@
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/utilities.min.css" rel="stylesheet">
 
         <script async src="{{ mix('js/app.js') }}"></script>
+        <script async src="https://cdn.jsdelivr.net/npm/taboverride@4.0.3/build/output/taboverride.min.js"></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('analytics.tracking_id') }}"></script>
         <script>
