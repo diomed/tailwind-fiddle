@@ -9,8 +9,20 @@
                      v-on:click="clear">
                     Clear
                 </div>
-                <div class="px-1 text-xs text-grey-dark">[</div>
-                <div class="text-xs text-grey-dark select-none tracking-wide uppercase">
+                <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase "
+                     v-on:click="center">
+                    Center
+                </div>
+                <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase"
+                     v-on:click="loadSource(srcAbout)">
+                    About
+                </div>
+                <a class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase no-underline"
+                   href="https://tailwindcss.com/docs/what-is-tailwind/"
+                   target="_blank"
+                   rel="nofollow noopener">Docs</a>
+                <div class="px-1 text-xs text-grey-dark">|</div>
+                <div class="pl-2 text-xs text-grey-dark select-none tracking-wide uppercase">
                     Demo:
                 </div>
                 <div class="pl-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase"
@@ -25,17 +37,7 @@
                      v-on:click="loadSource(srcSelf)">
                     three
                 </div>
-                <div class="px-1 text-xs text-grey-dark">]</div>
-                <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase"
-                     v-on:click="loadSource(srcAbout)">
-                    About
-                </div>
-                <div class="pl-1 text-xs text-grey-dark">|</div>
-                <div class="pr-1 text-xs text-grey-dark">|</div>
-                <a class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase no-underline"
-                   href="https://tailwindcss.com/docs/what-is-tailwind/"
-                   target="_blank"
-                   rel="nofollow noopener">Docs</a>
+
             </div>
             <div class="w-full relative flex flex-1">
                 <div id="editor" class="w-full flex-1 py-1 font-mono leading-tight border-grey-light z-10 bg-transparent">
@@ -87,9 +89,19 @@
             clear: function () {
                 this.editor.setValue('', 1);
             },
-            loadSource: function (source) {
+            center: function () {
+                this.editor.selectAll();
+                this.editor.indent();
+
+                let newSource = '<div class="h-full flex justify-center items-center">\n' + this.source + '\n</div>';
+                this.loadSource(newSource, 1);
+            },
+            loadSource: function (source, cursorLineNo = 0) {
                 this.editor.setValue(source, 1);
                 this.editor.scrollToLine(0);
+
+                this.editor.moveCursorTo(cursorLineNo, 0);
+                this.editor.focus();
             }
         },
         mounted () {
