@@ -32,17 +32,16 @@
                    rel="nofollow noopener">Docs</a>
             </div>
             <div class="w-full relative flex flex-1">
-                <!-- v-on:keydown.tab.prevent="keydownTab" -->
-                <!-- v-on:keydown.shift.tab.prevent="keydownShiftTab" -->
-                <!-- v-on:keydown.enter.prevent="keydownEnter" -->
-                <textarea
-                    ref="editor"
-                    class="language-html w-full flex-1 py-1 font-mono text-xs border-grey-light leading-tight z-10 bg-transparent"
+                <div id="editor" class="w-full flex-1 py-1 font-mono leading-tight border-grey-light z-10 bg-transparent">
+                </div>
+                <!-- <textarea
+                    id="editor"
+                    class="w-full flex-1 py-1 font-mono text-xs border-grey-light leading-tight z-10 bg-transparent"
                     name="name" rows="8" cols="80"
                     v-model="source"
                     v-on:keydown.delete.prevent="keydownDelete"
                     placeholder="Your awesome HTML with Tailwind CSS goes here. Hit Demo or About above to see what's this about 💡">
-                </textarea>
+                </textarea> -->
                 <div class="absolute pin-t pin-r">
                     <div class="invisible lg:visible text-5xl m-4 font-bold text-grey-lighter">
                         Tailwind Fiddle
@@ -68,12 +67,15 @@
 <script>
     export default {
         props: [
+            'placeholder',
             'srcDemo',
             'srcSelf',
             'srcAbout'
         ],
         data: function () {
             return {
+                editorId: 'editor',
+                editor: Object,
                 source: ''
             };
         },
@@ -83,147 +85,43 @@
         },
         methods: {
             clear: function () {
-                this.source = '';
+                this.editor.setValue('', 1);
             },
             loadSource: function (source) {
-                this.source = source;
-            },
-            keydownEnter: function () {
-                let editor = this.$refs.editor;
-                let selectionStart = editor.selectionStart;
-                let selectionEnd   = editor.selectionEnd;
+                this.editor.setValue(source, 1);
+            }
+        },
+        mounted () {
+        	this.editor = window.ace.edit(this.editorId);
+            this.editor.setTheme(`ace/theme/tomorrow`);
+            // this.editor.style.fontSize='12px'; // Doesn't seem to work.
+            this.editor.on('change', () => {
+                this.source = this.editor.getValue();
+            });
 
-                let newSelectionStart = 0;
-                let newSelectionEnd   = 0;
-
-                let first  = this.source.substring(0, selectionStart);
-                let second = this.source.substring(selectionEnd);
-
-                if (selectionStart === selectionEnd) {
-                    let lastNewline = this.source.lastIndexOf('\n', selectionEnd - 1);
-
-                    let restOfSource = '';
-                    let cursorPositionDelta = 1;
-
-                    if (lastNewline === -1) {
-                        this.source = first + '\n' + second;
-                    } else {
-                        restOfSource = this.source.substring(lastNewline + 1, this.source.length);
-
-                        let whitespaceRegEx = /^\s*/gi;
-                        let whitespaceMatch = restOfSource.match(whitespaceRegEx)[0];
-
-                        this.source = first + '\n' + whitespaceMatch + second;
-                        cursorPositionDelta = whitespaceMatch.length + 1;
+            let session = this.editor.getSession();
+            session.setMode(`ace/mode/html`);
+            session.setTabSize(4);
+            session.setUseSoftTabs(true);
+            session.setUseWrapMode(true);
+            // Modified snippet from: https://groups.google.com/forum/#!topic/ace-discuss/qOVHhjhgpsU
+            // We really want to hide the missing doctype warning.
+            session.on("changeAnnotation", function() {
+                let annotations = session.getAnnotations() || [];
+                let i = annotations.length;
+                let len = 0;
+                while (i--) {
+                    if (/doctype first\. Expected/.test(annotations[i].text)) {
+                        annotations.splice(i, 1);
+                        session.setAnnotations(annotations);
                     }
-
-                    newSelectionStart = selectionEnd + cursorPositionDelta;
-                    newSelectionEnd   = newSelectionStart;
-                } else {
-                    this.source = first + '\n' + second;
-
-                    newSelectionStart = selectionEnd - 1;
-                    newSelectionEnd   = newSelectionStart;
                 }
+            });
 
-                Vue.nextTick(function () {
-                    editor.setSelectionRange(newSelectionStart, newSelectionEnd);
-                });
-            }, // --- enter
-            keydownDelete: function () {
-                let editor = this.$refs.editor;
-                let selectionStart = editor.selectionStart;
-                let selectionEnd   = editor.selectionEnd;
-
-                let newSelectionStart = 0;
-                let newSelectionEnd = 0;
-
-                if (selectionStart === selectionEnd) {
-                    if (selectionStart > 0) {
-                        let first  = this.source.substring(0, selectionStart - 1);
-                        let second = this.source.substring(selectionStart);
-
-                        this.source = first + second;
-
-                        newSelectionStart = selectionStart - 1;
-                        newSelectionEnd   = selectionStart - 1;
-                    }
-                } else {
-                    let first  = this.source.substring(0, selectionStart);
-                    let second = this.source.substring(selectionEnd);
-
-                    this.source = first + second;
-
-                    newSelectionStart = selectionStart;
-                    newSelectionEnd   = selectionStart;
-                }
-
-                Vue.nextTick(function () {
-                    editor.setSelectionRange(newSelectionStart, newSelectionEnd);
-                });
-            }, // --- delete
-            keydownTab: function () {
-                let text = '    '; // TODO extract
-                let editor = this.$refs.editor;
-                let selectionStart = editor.selectionStart;
-                let selectionEnd = editor.selectionEnd;
-
-                let first = this.source.substring(0, editor.selectionEnd);
-                let second = this.source.substring(editor.selectionEnd);
-
-                if (selectionStart === selectionEnd) {
-                    this.source = first + text + second;
-                } else {
-                    // Indent selected lines.
-                    let lastNewlineIndex = this.source.lastIndexOf('\n', selectionStart - 1);
-                    let newlineIndex = 0, searchToIndex = selectionEnd;
-                    do {
-                        newlineIndex = this.source.lastIndexOf('\n', searchToIndex - 1);
-
-                        let first  = this.source.substring(0, newlineIndex + 1);
-                        let second = this.source.substring(newlineIndex + 1);
-
-                        this.source = first + text + second;
-                        searchToIndex = newlineIndex;
-                    } while (newlineIndex > lastNewlineIndex);
-                }
-
-                let textLength = text.length;
-                Vue.nextTick(function () {
-                    editor.setSelectionRange(selectionStart + textLength, selectionEnd + textLength);
-                });
-            }, // --- tab
-            keydownShiftTab: function () {
-                let text = '    '; // TODO extract
-                let editor = this.$refs.editor;
-                let selectionStart = editor.selectionStart;
-                let selectionEnd = editor.selectionEnd;
-
-                let newSelectionStart = 0;
-                let newSelectionEnd = 0;
-
-                // let first = this.source.substring(0, editor.selectionEnd);
-                // let second = this.source.substring(editor.selectionEnd);
-
-                if (selectionStart === selectionEnd && selectionStart >= text.length) {
-                    if (this.source.substring(selectionStart - text.length, selectionStart) !== text) {
-                        // TODO de-indent
-                        return;
-                    } else {
-                        let first = this.source.substring(0, selectionStart - text.length)
-                        let second = this.source.substring(selectionStart);
-                        this.source = first + second;
-
-                        newSelectionStart = selectionStart - 4;
-                        newSelectionEnd = newSelectionStart;
-                    }
-                } else {
-                    //  TODO De-indent selected lines.
-                }
-
-                Vue.nextTick(function () {
-                    editor.setSelectionRange(newSelectionStart, newSelectionEnd);
-                });
+            let visitedAlready = localStorage.getItem('introSeen');
+            if (visitedAlready == null) {
+                this.loadSource(this.placeholder);
+                localStorage.setItem('introSeen', true);
             }
 
         } // --- methods
