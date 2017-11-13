@@ -9,17 +9,23 @@
                      v-on:click="clear">
                     Clear
                 </div>
-                <div class="px-1 text-xs text-grey-dark">|</div>
-                <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase"
+                <div class="px-1 text-xs text-grey-dark">[</div>
+                <div class="text-xs text-grey-dark select-none tracking-wide uppercase">
+                    Demo:
+                </div>
+                <div class="pl-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase"
                      v-on:click="loadSource(srcDemo)">
-                    Demo
+                    one
                 </div>
-                <div class="px-1 text-xs text-grey-dark">|</div>
-                <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase"
+                <div class="pl-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase"
+                     v-on:click="loadSource(srcDemo2)">
+                    two
+                </div>
+                <div class="pl-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase"
                      v-on:click="loadSource(srcSelf)">
-                    Inception
+                    three
                 </div>
-                <div class="px-1 text-xs text-grey-dark">|</div>
+                <div class="px-1 text-xs text-grey-dark">]</div>
                 <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase"
                      v-on:click="loadSource(srcAbout)">
                     About
@@ -62,6 +68,7 @@
         props: [
             'placeholder',
             'srcDemo',
+            'srcDemo2',
             'srcSelf',
             'srcAbout'
         ],
@@ -89,9 +96,6 @@
         	this.editor = window.ace.edit(this.editorId);
             this.editor.setTheme(`ace/theme/tomorrow`);
             // this.editor.style.fontSize='12px'; // Doesn't seem to work.
-            this.editor.on('change', () => {
-                this.source = this.editor.getValue();
-            });
 
             let session = this.editor.getSession();
             session.setMode(`ace/mode/html`);
@@ -110,6 +114,19 @@
                         session.setAnnotations(annotations);
                     }
                 }
+            });
+
+            window.ace.require("ace/ext/language_tools");
+            this.editor.setOptions({
+                enableBasicAutocompletion: true,
+                enableSnippets: true,
+                enableLiveAutocompletion: false
+            });
+            editor.$blockScrolling = Infinity;
+
+            // Hooking this up last, after editor is configured.
+            this.editor.on('change', () => {
+                this.source = this.editor.getValue();
             });
 
             let visitedAlready = localStorage.getItem('introSeen');
