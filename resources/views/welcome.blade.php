@@ -29,9 +29,7 @@
         {{-- Code editor - ACE --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js"></script>
         {{-- App JS, mostly Vue. --}}
-        <script src="{{ mix('js/manifest.js') }}"></script>
-        <script src="{{ mix('js/vendor.js') }}"></script>
-        <script src="{{ mix('js/app.js') }}"></script>
+        <script async src="{{ mix('js/app.js') }}"></script>
         {{-- Global site tag (gtag.js) - Google Analytics --}}
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('analytics.tracking_id') }}"></script>
         <script>
