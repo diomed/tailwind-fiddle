@@ -19,6 +19,10 @@
                 height: 100vh;
                 margin: 0;
             }
+            #editor {
+                background-color: transparent !important;
+                z-index: 10;
+            }
         </style>
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/utilities.min.css" rel="stylesheet">
 
