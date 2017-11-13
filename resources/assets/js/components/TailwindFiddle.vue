@@ -94,14 +94,14 @@
                 this.editor.indent();
 
                 let newSource = '<div class="h-full flex justify-center items-center">\n' + this.source + '\n</div>';
-                this.loadSource(newSource);
-
-                this.editor.moveCursorTo(1, 0);
-                this.editor.focus();
+                this.loadSource(newSource, 1);
             },
-            loadSource: function (source) {
+            loadSource: function (source, cursorLineNo = 0) {
                 this.editor.setValue(source, 1);
                 this.editor.scrollToLine(0);
+
+                this.editor.moveCursorTo(cursorLineNo, 0);
+                this.editor.focus();
             }
         },
         mounted () {
