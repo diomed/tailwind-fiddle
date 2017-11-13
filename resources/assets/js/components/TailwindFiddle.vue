@@ -9,6 +9,11 @@
                      v-on:click="clear">
                     Clear
                 </div>
+                <div class="px-1 text-xs text-grey-dark">|</div>
+                <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase "
+                     v-on:click="center">
+                    Center
+                </div>
                 <div class="px-1 text-xs text-grey-dark">[</div>
                 <div class="text-xs text-grey-dark select-none tracking-wide uppercase">
                     Demo:
@@ -86,6 +91,12 @@
         methods: {
             clear: function () {
                 this.editor.setValue('', 1);
+            },
+            center: function () {
+                this.editor.selectAll();
+                this.editor.indent();
+                let newSource = '<div class="h-full flex justify-center items-center">\n' + this.source + '\n</div>';
+                this.loadSource(newSource);
             },
             loadSource: function (source) {
                 this.editor.setValue(source, 1);
