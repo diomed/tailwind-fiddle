@@ -92,8 +92,12 @@
             center: function () {
                 this.editor.selectAll();
                 this.editor.indent();
+
                 let newSource = '<div class="h-full flex justify-center items-center">\n' + this.source + '\n</div>';
                 this.loadSource(newSource);
+
+                this.editor.moveCursorTo(1, 0);
+                this.editor.focus();
             },
             loadSource: function (source) {
                 this.editor.setValue(source, 1);
