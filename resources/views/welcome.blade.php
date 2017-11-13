@@ -22,14 +22,16 @@
         </style>
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/utilities.min.css" rel="stylesheet">
 
+        {{-- Code editor - ACE --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js"></script>
+        {{-- App JS, mostly Vue. --}}
         <script async src="{{ mix('js/app.js') }}"></script>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
+        {{-- Global site tag (gtag.js) - Google Analytics --}}
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('analytics.tracking_id') }}"></script>
         <script>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-
           gtag('config', '{{ config('analytics.tracking_id') }}');
         </script>
 

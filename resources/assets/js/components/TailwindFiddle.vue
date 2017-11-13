@@ -32,12 +32,15 @@
                    rel="nofollow noopener">Docs</a>
             </div>
             <div class="w-full relative flex flex-1">
-                <textarea
+                <div id="editor" class="w-full flex-1 py-1 font-mono leading-tight border-grey-light z-10 bg-transparent">
+                </div>
+                <!-- <textarea
+                    id="editor"
                     class="w-full flex-1 py-1 font-mono text-xs border-grey-light leading-tight z-10 bg-transparent"
                     name="name" rows="8" cols="80"
                     v-model="source"
                     placeholder="Your awesome HTML with Tailwind CSS goes here. Hit Demo or About above to see what's this about 💡">
-                </textarea>
+                </textarea> -->
                 <div class="absolute pin-t pin-r">
                     <div class="invisible lg:visible text-5xl m-4 font-bold text-grey-lighter">
                         Tailwind Fiddle
@@ -63,22 +66,45 @@
 <script>
     export default {
         props: [
+            'placeholder',
             'srcDemo',
             'srcSelf',
             'srcAbout'
         ],
         data: function () {
             return {
+                editorId: 'editor',
+                editor: Object,
                 source: ''
             }
         },
         methods: {
             clear: function () {
-                this.source = ''
+                this.editor.setValue('', 1);
             },
             loadSource: function (source) {
-                this.source = source
+                this.editor.setValue(source, 1);
             }
+        },
+        mounted () {
+        	this.editor = window.ace.edit(this.editorId);
+            let e = this.editor;
+            e.getSession().setMode(`ace/mode/html`);
+            e.setTheme(`ace/theme/tomorrow`);
+            e.getSession().setTabSize(4);
+            e.getSession().setUseSoftTabs(true);
+            e.getSession().setUseWrapMode(true);
+            // this.editor.style.fontSize='12px'; // Doesn't seem to work.
+
+            let visitedAlready = localStorage.getItem('introSeen');
+            if (visitedAlready == null) {
+                this.loadSource(this.placeholder);
+                localStorage.setItem('introSeen', true);
+            }
+
+            this.editor.on('change', () => {
+                this.source = this.editor.getValue();
+            });
         }
     }
 </script>
