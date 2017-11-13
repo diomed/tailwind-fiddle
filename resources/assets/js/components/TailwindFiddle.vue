@@ -88,23 +88,23 @@
         },
         mounted () {
         	this.editor = window.ace.edit(this.editorId);
-            let e = this.editor;
-            e.getSession().setMode(`ace/mode/html`);
-            e.setTheme(`ace/theme/tomorrow`);
-            e.getSession().setTabSize(4);
-            e.getSession().setUseSoftTabs(true);
-            e.getSession().setUseWrapMode(true);
+            this.editor.setTheme(`ace/theme/tomorrow`);
             // this.editor.style.fontSize='12px'; // Doesn't seem to work.
+            this.editor.on('change', () => {
+                this.source = this.editor.getValue();
+            });
+
+            let session = this.editor.getSession();
+            session.setMode(`ace/mode/html`);
+            session.setTabSize(4);
+            session.setUseSoftTabs(true);
+            session.setUseWrapMode(true);
 
             let visitedAlready = localStorage.getItem('introSeen');
             if (visitedAlready == null) {
                 this.loadSource(this.placeholder);
                 localStorage.setItem('introSeen', true);
             }
-
-            this.editor.on('change', () => {
-                this.source = this.editor.getValue();
-            });
         }
     }
 </script>
