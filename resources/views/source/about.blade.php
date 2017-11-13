@@ -1,5 +1,5 @@
 <div class="w-full p-3 flex justify-center items-center">
-    <div class="w-full mx-auto md:4/5 lg:w-3/5 xl:1/2 p-8 border border-blue-lighter border-1 text-grey-darker leading-normal">
+    <div class="w-full mx-auto md:4/5 lg:w-3/5 xl:1/2 p-6 border border-blue-lighter border-1 text-grey-darker leading-normal">
         <p>
             Hey! Thanks for checking out <span class="font-semibold text-blue">Tailwind fiddle</span> by
             <a class="text-blue no-underline hover:text-purple" href="https://twitter.com/mkarnicki">Michał Karnicki</a>.

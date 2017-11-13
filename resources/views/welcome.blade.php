@@ -37,7 +37,7 @@
 
     </head>
 
-    <body>
+    <body class="overflow-hidden">
         <div id="app" class="w-screen h-screen">
             @include('twfiddle')
         </div>
