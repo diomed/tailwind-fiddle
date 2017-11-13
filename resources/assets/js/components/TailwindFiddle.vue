@@ -89,6 +89,7 @@
             },
             loadSource: function (source) {
                 this.editor.setValue(source, 1);
+                this.editor.scrollToLine(0);
             }
         },
         mounted () {
