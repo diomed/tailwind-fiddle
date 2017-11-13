@@ -99,6 +99,19 @@
             session.setTabSize(4);
             session.setUseSoftTabs(true);
             session.setUseWrapMode(true);
+            // Modified snippet from: https://groups.google.com/forum/#!topic/ace-discuss/qOVHhjhgpsU
+            // We really want to hide the missing doctype warning.
+            session.on("changeAnnotation", function() {
+                let annotations = session.getAnnotations() || [];
+                let i = annotations.length;
+                let len = 0;
+                while (i--) {
+                    if (/doctype first\. Expected/.test(annotations[i].text)) {
+                        annotations.splice(i, 1);
+                        session.setAnnotations(annotations);
+                    }
+                }
+            });
 
             let visitedAlready = localStorage.getItem('introSeen');
             if (visitedAlready == null) {
