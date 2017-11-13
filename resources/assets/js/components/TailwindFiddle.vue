@@ -89,9 +89,6 @@
         	this.editor = window.ace.edit(this.editorId);
             this.editor.setTheme(`ace/theme/tomorrow`);
             // this.editor.style.fontSize='12px'; // Doesn't seem to work.
-            this.editor.on('change', () => {
-                this.source = this.editor.getValue();
-            });
 
             let session = this.editor.getSession();
             session.setMode(`ace/mode/html`);
@@ -110,6 +107,19 @@
                         session.setAnnotations(annotations);
                     }
                 }
+            });
+
+            window.ace.require("ace/ext/language_tools");
+            this.editor.setOptions({
+                enableBasicAutocompletion: true,
+                enableSnippets: true,
+                enableLiveAutocompletion: false
+            });
+            editor.$blockScrolling = Infinity;
+
+            // Hooking this up last, after editor is configured.
+            this.editor.on('change', () => {
+                this.source = this.editor.getValue();
             });
 
             let visitedAlready = localStorage.getItem('introSeen');
