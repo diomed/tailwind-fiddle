@@ -208,7 +208,7 @@
                 let menuItem = this.$refs.gistMenuItem;
                 menuItem.classList.add('cursor-not-allowed');
 
-                let descriptionFooter = '\n\n - created with https://tailwind.unravel.eu';
+                let descriptionFooter = '\n\n - see it live here https://tailwind.unravel.eu';
 
                 let filename = kebabCase((this.$refs.gistFilename.value || 'Tailwind Fiddle') + '.html');
                 let description = (this.$refs.gistDescription.value || 'Tailwind Fiddle') + descriptionFooter;
