@@ -10,9 +10,16 @@
 
 ## What's this?
 
-I got tired of hitting Ctrl+S in Atom, but at the same time I'm not into "auto-saving".
+I got tired of hitting Ctrl+S in Atom and switching to the browser; at the same time I'm not into "auto-saving". So I quickly created [Tailwind Fiddle](https://tailwind.unravel.eu/) and had a lot of fun doing that. No more Ctrl+S to design those Tailwind-powered components :100:. Want to see how a Tailwind component looks like? Just paste it [here](https://tailwind.unravel.eu/)!
 
-So I quickly created Tailwind Fiddle and had a lot of fun doing that. No more Ctrl+S to design those Tailwind-powered components :100:.
+## Changelog
+
+```
+v0.2.2 - Added basic code autocompletion support (ctrl+space)
+v0.2.1 - Added Emmet support (tab key)
+v0.2.0 - Added Ace code editor by Cloud9.
+v0.1.0 - Initial version with a basic textarea.
+```
 
 ## Contributing
 
