@@ -1,4 +1,5 @@
 <tailwind-fiddle
+    ref="twf"
     class="w-full h-full"
     placeholder='@include('source.placeholder')'
     src-demo='@include('source.demo')'

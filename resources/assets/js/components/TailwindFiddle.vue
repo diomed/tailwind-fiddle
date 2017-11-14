@@ -4,40 +4,101 @@
         </div>
 
         <div class="w-full flex flex-col items-center" style="height: 20rem;">
-            <div class="w-full h-6 px-2 bg-grey-lighter inline-flex items-center">
-                <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase "
+            <div class="w-full bg-grey-lighter inline-flex flex-wrap items-strech">
+                <div class="px-2 py-2 text-xs text-grey-dark text-blue hover:text-purple hover:bg-grey-light cursor-pointer select-none tracking-wide uppercase "
                      v-on:click="clear">
                     Clear
                 </div>
-                <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase "
+                <div class="px-2 py-2 text-xs text-grey-dark text-blue hover:text-purple hover:bg-grey-light cursor-pointer select-none tracking-wide uppercase "
                      v-on:click="center">
                     Center
                 </div>
-                <div class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase"
+                <div class="px-2 py-2 text-xs text-grey-dark text-blue hover:text-purple hover:bg-grey-light cursor-pointer select-none tracking-wide uppercase "
+                     ref="gistMenuItem"
+                     v-on:click="toggleGistPanel">
+                    Gist
+                </div>
+                <div class="px-2 py-2 text-xs text-grey-dark text-blue hover:text-purple hover:bg-grey-light cursor-pointer select-none tracking-wide uppercase"
                      v-on:click="loadSource(srcAbout)">
                     About
                 </div>
-                <a class="px-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase no-underline"
+                <a class="px-2 py-2 text-xs text-grey-dark text-blue hover:text-purple hover:bg-grey-light cursor-pointer select-none tracking-wide uppercase no-underline"
                    href="https://tailwindcss.com/docs/what-is-tailwind/"
                    target="_blank"
                    rel="nofollow noopener">Docs</a>
-                <div class="px-1 text-xs text-grey-dark">|</div>
-                <div class="pl-2 text-xs text-grey-dark select-none tracking-wide uppercase">
+                <div class="px-1 py-2 text-xs text-grey-dark">|</div>
+                <div class="px-2 py-2 text-xs text-grey-dark select-none tracking-wide uppercase">
                     Demo:
                 </div>
-                <div class="pl-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase"
+                <div class="px-2 py-2 text-xs text-grey-dark text-blue hover:text-purple hover:bg-grey-light cursor-pointer select-none tracking-wide uppercase"
                      v-on:click="loadSource(srcDemo)">
                     one
                 </div>
-                <div class="pl-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase"
+                <div class="px-2 py-2 text-xs text-grey-dark text-blue hover:text-purple hover:bg-grey-light cursor-pointer select-none tracking-wide uppercase"
                      v-on:click="loadSource(srcDemo2)">
                     two
                 </div>
-                <div class="pl-2 text-xs text-grey-dark hover:text-blue cursor-pointer select-none tracking-wide uppercase"
+                <div class="px-2 py-2 text-xs text-grey-dark text-blue hover:text-purple hover:bg-grey-light cursor-pointer select-none tracking-wide uppercase"
                      v-on:click="loadSource(srcSelf)">
                     three
                 </div>
 
+            </div>
+            <div ref="gistPanel" class="w-full h-auto px-2 bg-grey-lighter hidden items-center">
+                <div
+                    v-if="gistHtmlUrl"
+                    class="my-2 inline-flex flex-wrap items-center">
+                    <button
+                        ref="gistClearButton"
+                        type="button"
+                        name="clearGist"
+                        class="w-16 mb-1 px-2 py-2 font-semibold text-sm text-grey-darker border"
+                        @click="clearGist">
+                        Clear
+                    </button>
+                    <a
+                        v-bind:href="gistHtmlUrl"
+                        target="_blank"
+                        rel="nofollow noopener"
+                        class="mx-2 text-sm no-underline text-blue hover:text-purple">{{ gistHtmlUrl }}</a>
+                </div>
+                <div
+                    v-else
+                    class="my-2 inline-flex flex-wrap items-center">
+                    <button
+                        ref="gistSaveButton"
+                        type="button"
+                        name="saveGist"
+                        class="w-16 mb-1 px-2 py-2 font-semibold text-sm text-grey-darker border"
+                        @click="saveToGist">
+                        Save
+                    </button>
+                    <span class="mx-2 mb-1 md:mb-0 text-sm text-grey">Both optional:</span>
+                    <input
+                        ref="gistFilename"
+                        type="text"
+                        name="filename"
+                        placeholder="Filename (no .html)"
+                        class="mr-2 mb-1 md:mb-0 px-2 py-1 w-full md:w-64 font-mono text-xs">
+                    <input
+                        ref="gistDescription"
+                        type="text"
+                        name="description"
+                        placeholder="Description"
+                        class="mr-2 mb-1 md:mb-0 px-2 py-1 w-full md:w-64 font-mono text-xs">
+                    <input
+                        ref="gistIsPublic"
+                        type="checkbox"
+                        name="public"
+                        checked="checked"
+                        class="mr-2 mb-1 md:mb-0 px-2 py-1 text-xs">
+                    <label class="mr-2 py-1 text-sm text-grey" for="public">Public</label>
+                    <a
+                        target="_blank"
+                        rel="nofollow noopener"
+                        href="https://help.github.com/articles/about-gists/"
+                        class="mx-2 py-1 text-sm text-blue hover:text-purple no-underline">What's this?</a>
+                </div>
             </div>
             <div class="w-full relative flex flex-1">
                 <div id="editor" class="w-full flex-1 py-1 font-mono leading-tight border-grey-light z-10 bg-transparent">
@@ -78,7 +139,9 @@
             return {
                 editorId: 'editor',
                 editor: Object,
-                source: ''
+                source: '',
+                gistIsSaving: false,
+                gistHtmlUrl: ''
             };
         },
         mounted () {
@@ -94,13 +157,81 @@
                 this.editor.indent();
 
                 let newSource = '<div class="h-full flex justify-center items-center">\n' + this.source + '\n</div>';
-                this.loadSource(newSource, 1);
+                this.loadSource(newSource, 1, 4);
             },
-            loadSource: function (source, cursorLineNo = 0) {
+            toggleGistPanel: function () {
+                let panel = this.$refs.gistPanel;
+                if (panel.classList.contains('hidden')) {
+                    panel.classList.replace('hidden', 'inline-flex');
+                    if (this.$refs.gistSaveButton) {
+                        this.$refs.gistSaveButton.focus();
+                    };
+                } else {
+                    panel.classList.replace('inline-flex', 'hidden');
+                }
+            },
+            saveToGist: function () {
+                let content = this.editor.getValue();
+                if (content.length < 10) {
+                    console.log("C'mon... that's probably not worth saving bruh.");
+                    return;
+                }
+                if (this.gistIsSaving) {
+                    return;
+                }
+                this.gistIsSaving = true;
+
+                let menuItem = this.$refs.gistMenuItem;
+                menuItem.classList.add('cursor-not-allowed');
+
+                let descriptionFooter = '\n\n - created with https://tailwind.unravel.eu';
+
+                let filename = kebabCase((this.$refs.gistFilename.value || 'Tailwind Fiddle') + '.html');
+                let description = (this.$refs.gistDescription.value || 'Tailwind Fiddle') + descriptionFooter;
+                let isPublic = this.$refs.gistIsPublic.checked;
+
+                let payload = {
+                    "description": description,
+                    "public": isPublic,
+                    "files": {
+                        [filename]: {
+                            "content": content
+                        }
+                    }
+                };
+                // console.log(payload);
+
+                axios({
+                    method: 'POST',
+                    url: 'https://api.github.com/gists',
+                    headers: {'Accept': 'application/vnd.github.v3+json'},
+                    data: payload
+                })
+                .then(function (response) {
+                    // console.log(response);
+                    if (response.status === 201) {
+                        // console.log(response.data.html_url);
+                        app.$refs.twf.gistHtmlUrl = response.data.html_url;
+                    } else {
+                        console.log(response);
+                    }
+                    menuItem.classList.remove('cursor-not-allowed');
+                    this.gistIsSaving = false;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    menuItem.classList.remove('cursor-not-allowed');
+                    this.gistIsSaving = false;
+                });
+            },
+            clearGist: function () {
+                this.gistHtmlUrl = '';
+            },
+            loadSource: function (source, cursorLineNo = 0, cursorColumnNo = 0) {
                 this.editor.setValue(source, 1);
                 this.editor.scrollToLine(0);
 
-                this.editor.moveCursorTo(cursorLineNo, 0);
+                this.editor.moveCursorTo(cursorLineNo, cursorColumnNo);
                 this.editor.focus();
             }
         },
