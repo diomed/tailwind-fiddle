@@ -105,7 +105,8 @@
             }
         },
         mounted () {
-        	this.editor = window.ace.edit(this.editorId);
+            window.ace.require("ace/ext/language_tools");
+            this.editor = window.ace.edit(this.editorId);
             this.editor.setTheme(`ace/theme/tomorrow`);
             // this.editor.style.fontSize='12px'; // Doesn't seem to work.
 
