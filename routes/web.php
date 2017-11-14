@@ -12,8 +12,6 @@
 */
 
 Route::get('/', function () {
-    request()->headers->set('Referer', 'https://gist.github.com/adamwathan/513d476de6c5d6213c0cd9c62f4ac154');
-
     $referrer = request()->headers->get('Referer');
     $gist = '';
 
