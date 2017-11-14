@@ -1,5 +1,5 @@
 <div class="w-full p-3 flex justify-center items-center">
-    <div class="w-full mx-auto md:4/5 lg:w-3/5 xl:1/2 p-6 border border-blue-lighter border-1 text-grey-darker leading-normal">
+    <div class="w-full mx-auto md:4/5 lg:w-3/5 xl:1/2 px-6 py-2 border border-blue-lighter border-1 text-grey-darker leading-normal">
         <p>
             Hey! Thanks for checking out <span class="font-semibold text-blue">Tailwind fiddle</span> by
             <a class="text-blue no-underline hover:text-purple" href="https://twitter.com/mkarnicki">Michał Karnicki</a>.
@@ -11,7 +11,7 @@
             I really had fun building this site. Actually, large part of it has been created with Tailwind&nbsp;Fiddle itself! The code editor (Ace by Cloud9) is now configured to provide code completion, emmet as well as multiple cursor support!
         </p>
         <p class="mt-8">
-            Tailwind is a utility-first CSS framework for rapidly building custom user interfaces by:
+            <a class="text-blue no-underline hover:text-purple" href="https://tailwindcss.com/">Tailwind</a> is a utility-first CSS framework for rapidly building custom user interfaces by:
             <ul class="mx-2 my-4 list-reset flex flex-col sm:flex-row justify-around">
                 <li><a class="text-blue no-underline hover:text-purple" href="https://twitter.com/adamwathan">Adam Wathan</a></li>
                 <li><a class="text-blue no-underline hover:text-purple" href="https://twitter.com/reinink">Jonathan Reinink</a></li>
@@ -21,8 +21,11 @@
             Go follow these awesome guys. You can also check out
             <a class="text-blue no-underline hover:text-purple" href="https://twitter.com/tailwindcss">TailwindCSS</a> on Twitter.
         </p>
-        <p class="mt-8">
-            The source is up on GitHub at <a class="text-blue no-underline hover:text-purple" href="https://github.com/mkarnicki/tailwind-fiddle">mkarnicki/tailwind-fiddle</a> 💡. Enjoy!
+        <p class="mt-6">
+            The source is up on <a class="text-blue no-underline hover:text-purple" href="https://github.com/mkarnicki/tailwind-fiddle">GitHub</a>. Enjoy!
+        </p>
+        <p>
+            <strong>Shortcuts</strong>: <em>tab</em> for emmet, <em>ctrl+space</em> for code autocompletion
         </p>
     </div>
 </div>

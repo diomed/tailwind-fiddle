@@ -58,7 +58,7 @@
         </svg>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js"></script>
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ext-language_tools.js"></script> --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ext-language_tools.js"></script>
         <script src="{{ mix('js/emmet.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ext-emmet.js"></script>
 
