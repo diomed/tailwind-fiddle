@@ -6,5 +6,6 @@
     src-demo2='@include('source.demo2')'
     src-self='@include('source.self')'
     src-about='@include('source.about')'
+    gist-id='{{ $gistId }}'
 >
 </tailwind-fiddle>

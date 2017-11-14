@@ -129,6 +129,7 @@
 <script>
     export default {
         props: [
+            'gistId',
             'placeholder',
             'srcDemo',
             'srcDemo2',
@@ -141,12 +142,35 @@
                 editor: Object,
                 source: '',
                 gistIsSaving: false,
-                gistHtmlUrl: ''
+                gistHtmlUrl: '',
             };
         },
-        mounted () {
-            tabOverride.tabSize(4);
-            tabOverride.set(this.$refs.editor);
+        created () {
+            // Load a gist, if the user came from gist.github.com:
+            if (this.gistId == '') {
+                return;
+            }
+            let apiGistUrl = 'https://api.github.com/gists/' + this.gistId;
+
+            axios({
+                method: 'GET',
+                url: apiGistUrl,
+                headers: {'Accept': 'application/vnd.github.v3+json'},
+            })
+            .then(function (response) {
+                if (response.status === 200) {
+                    let files = response.data.files;
+                    let firstFile = Object.keys(files)[0];
+
+                    let rawGistUrl = files[firstFile].raw_url;
+                    app.$refs.twf.loadFromGist(rawGistUrl);
+                } else {
+                    console.log(response);
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         },
         methods: {
             clear: function () {
@@ -184,7 +208,7 @@
                 let menuItem = this.$refs.gistMenuItem;
                 menuItem.classList.add('cursor-not-allowed');
 
-                let descriptionFooter = '\n\n - created with https://tailwind.unravel.eu';
+                let descriptionFooter = '\n\n - see it live here https://tailwind.unravel.eu';
 
                 let filename = kebabCase((this.$refs.gistFilename.value || 'Tailwind Fiddle') + '.html');
                 let description = (this.$refs.gistDescription.value || 'Tailwind Fiddle') + descriptionFooter;
@@ -208,9 +232,7 @@
                     data: payload
                 })
                 .then(function (response) {
-                    // console.log(response);
                     if (response.status === 201) {
-                        // console.log(response.data.html_url);
                         app.$refs.twf.gistHtmlUrl = response.data.html_url;
                     } else {
                         console.log(response);
@@ -222,6 +244,24 @@
                     console.log(error);
                     menuItem.classList.remove('cursor-not-allowed');
                     this.gistIsSaving = false;
+                });
+            },
+            loadFromGist: function (rawGistUrl) {
+                axios({
+                    method: 'GET',
+                    url: rawGistUrl,
+                    headers: {'Accept': 'application/vnd.github.v3+json'},
+                })
+                .then(function (response) {
+                    console.log(response);
+                    if (response.status === 200) {
+                        app.$refs.twf.loadSource(response.data);
+                    } else {
+                        console.log(response);
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
                 });
             },
             clearGist: function () {
