@@ -8,6 +8,9 @@
 // require('./bootstrap');
 
 window.Vue = require('vue');
+window.axios = require('axios');
+
+window.kebabCase = string => string.replace(/([a-z])([A-Z])/g, '$1-$2').replace(/\s+/g, '-').toLowerCase()
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -17,6 +20,6 @@ window.Vue = require('vue');
 
 Vue.component('tailwind-fiddle', require('./components/TailwindFiddle.vue'));
 
-const app = new Vue({
+window.app = new Vue({
     el: '#app'
 });
