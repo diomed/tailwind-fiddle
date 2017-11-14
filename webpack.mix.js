@@ -13,7 +13,7 @@ let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
     .copy('resources/assets/js/emmet.js', 'public/js')
-    .extract(['vue']);
+    .extract(['vue', 'axios']);
 
 if (mix.inProduction()) {
     mix.version()
